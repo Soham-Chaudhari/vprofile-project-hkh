@@ -107,6 +107,9 @@ pipeline {
 
         stage('Build App Image') {
             steps {
+                echo 'COPYING ARTIFACT'
+                sh 'cp target/vprofile-v2.war Docker-files/app/'
+                echo 'BUILDING APP IMAGE'
                 script {
                     dockerImage = docker.build( appRegistry + ":$BUILD_NUMBER", "./Docker-files/app/")
                 }
